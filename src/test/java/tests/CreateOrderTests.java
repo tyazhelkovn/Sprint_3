@@ -4,20 +4,16 @@ import java.io.File;
 
 import io.restassured.response.Response;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import steps.TestSteps;
 
 public class CreateOrderTests {
     TestSteps step = new TestSteps();
 
-    @Before
-    public void setUp() {
-        step.cancelOrderStep();
-    }
 
     @After
     public void tearDown() {
+        step.cancelOrderStep();
         step.clearCash();
     }
 

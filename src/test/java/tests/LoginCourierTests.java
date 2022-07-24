@@ -3,7 +3,7 @@ package tests;
 import java.io.File;
 
 import io.restassured.response.Response;
-import org.junit.Before;
+import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
 import steps.TestSteps;
@@ -13,8 +13,8 @@ public class LoginCourierTests {
     File loginNewCourier = new File("src/test/resources/login/loginNewCourier.json");
     TestSteps step = new TestSteps();
 
-    @Before
-    public void setUp() {
+    @After
+    public void tearDown() {
         step.deleteTestDataStep(loginNewCourier);
         step.createCourierStep(newCourier);
     }

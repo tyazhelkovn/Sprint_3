@@ -7,14 +7,13 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class CourierRequestBuilder {
-    BaseClass baseClass = new BaseClass();
+public class CourierRequestBuilder extends BaseClass {
     private final static String COURIER_PATH = "/api/v1/courier/";
 
     public Response createCourier(File file) {
         return
                 given()
-                        .spec(baseClass.getRequestSpecification())
+                        .spec(getRequestSpecification())
                         .header("Content-type", "application/json")
                         .and()
                         .body(file)
@@ -25,7 +24,7 @@ public class CourierRequestBuilder {
     public void deleteTestData (File file) {
         int courierId;
         Response response = given()
-                .spec(baseClass.getRequestSpecification())
+                .spec(getRequestSpecification())
                 .header("Content-type", "application/json")
                 .and()
                 .body(file)
@@ -34,14 +33,14 @@ public class CourierRequestBuilder {
         if (!(response.then().extract().body().path("id") == null)) {
             courierId = response.then().extract().body().path("id");
             given()
-                    .spec(baseClass.getRequestSpecification())
+                    .spec(getRequestSpecification())
                     .delete(COURIER_PATH + courierId);
         }
     }
 
     public Response loginCourier (File file) {
         return given()
-                .spec(baseClass.getRequestSpecification())
+                .spec(getRequestSpecification())
                 .header("Content-type", "application/json")
                 .and()
                 .body(file)
